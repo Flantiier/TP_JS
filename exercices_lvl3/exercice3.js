@@ -99,7 +99,7 @@ function convertDecimalToBase(convertedNumber, base){
 function convertBaseToDecimal(convertedNumber, base){
     const string = String(convertedNumber);
     const maxPow = getMaxPow(convertedNumber, 10);
-    let result = "";
+    let result = 0;
 
     for (let i = 0; i < maxPow; i++) {
         const number = Number(string[i]);
@@ -120,8 +120,14 @@ function convertHexaToDecimal(convertedNumber, base){
     console.log(`La valeur de ${convertedNumber} en base ${base} vaut en base 10 : ${result}`);
 }
 
-// convertNumberToDecimal(11010011, 2);
+//DECIMAL => BASES
+convertDecimalToBase(162, 2);
+convertDecimalToBase(100, 3);
 
-convertDecimalToBase(841, 12);
+//BASES => DECIMAL
+convertBaseToDecimal(2230, 7);  // => 805
+convertBaseToDecimal(13321, 4); // => 505
+
+//HEXADECIMAL => DECIMAL
 convertDecimalToBase(5632, 22);
 convertHexaToDecimal("BE0", 22);
