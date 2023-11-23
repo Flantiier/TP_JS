@@ -54,7 +54,6 @@ function getMaxPow(convertedNumber, base){
         i++;
     }
 
-    // console.log(i);
     return i;
 }
 
@@ -73,7 +72,7 @@ function invertString(string){
  * @param {number} base the base to convert the number
  * @returns the converted number based on the given base
  */
-function convertNumberToBase(convertedNumber, base){
+function convertDecimalToBase(convertedNumber, base){
 
     let maxPow = getMaxPow(convertedNumber, base);    
     let result = "";
@@ -81,14 +80,14 @@ function convertNumberToBase(convertedNumber, base){
 
     for (let i = maxPow - 1; i >= 0; i--) {
         const powValue = Math.pow(base, i);
-        let baseValue = Math.floor(remainder / powValue);
+        let baseValue = Math.floor(remainder / powValue).toString(36).toUpperCase();
         remainder = Math.floor(remainder % powValue);
 
         result += baseValue;
     }
 
     console.log(`La valeur de ${convertedNumber} en base ${base} est : ${result}`);
-    return Number(result);
+    return result;
 }
 
 /**
@@ -97,10 +96,10 @@ function convertNumberToBase(convertedNumber, base){
  * @param {number} base base to convert into
  * @returns the converted number in base 10
  */
-function convertNumberToDecimal(convertedNumber, base){
+function convertBaseToDecimal(convertedNumber, base){
     const string = String(convertedNumber);
     const maxPow = getMaxPow(convertedNumber, 10);
-    let result = 0;
+    let result = "";
 
     for (let i = 0; i < maxPow; i++) {
         const number = Number(string[i]);
@@ -111,6 +110,18 @@ function convertNumberToDecimal(convertedNumber, base){
     return result;
 }
 
-convertNumberToDecimal(11010011, 2);
-convertNumberToDecimal(10201, 3);
-convertNumberToDecimal(2202, 4);
+/**
+ * Convert a hexadecimal number into decimals according to its base
+ * @param {number} convertedNumber the hexadecimal number to convert
+ * @param {number} base the base of the hexadecimal number
+ */
+function convertHexaToDecimal(convertedNumber, base){
+    const result = parseInt(convertedNumber, base);
+    console.log(`La valeur de ${convertedNumber} en base ${base} vaut en base 10 : ${result}`);
+}
+
+// convertNumberToDecimal(11010011, 2);
+
+convertDecimalToBase(841, 12);
+convertDecimalToBase(5632, 22);
+convertHexaToDecimal("BE0", 22);
